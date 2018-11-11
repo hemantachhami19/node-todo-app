@@ -7,7 +7,9 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     console.log("Connecting with the mongo server");
     const db = client.db('TodoApp');
 
-    //INSERTING
+    /**********
+     * CREATE
+     **********/
     //  // Insert one
     // db.collection('TodoApp').insertOne({
     //     text: 'test text1',
@@ -35,7 +37,9 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     //     console.log(result.ops);
     // });
 
-    //FETCHING:
+    /**********
+     * READ
+     **********/
     //Fetch all items:
     // db.collection('todos').find({}).toArray((error,result)=>{
     //     if (error) throw  error;
@@ -68,7 +72,9 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     //    console.log(result);
     // });
 
-    //UPDATING
+    /**********
+    *UPDATE*
+    **********/
     // updating a first object
     // let myObject = { text:'Read a book1'};
     // let newObject = {$set:{text:'Read a book2'}};
@@ -79,12 +85,13 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     // });
 
     //updating many objects in collections
-    // let myObject = {completed:true};
-    // let newObject = {$set:{completed:false}};
-    // db.collection('todos').updateMany(myObject,newObject,(error,result)=>{
-    //     if(error)
-    //         throw error;
-    //     console.log(result);
-    // });
+    let myObject = {completed:true};
+    let newObject = {$set:{completed:false}};
+    db.collection('todos').updateMany(myObject,newObject,(error,result)=>{
+        if(error)
+            throw error;
+        console.log(result.result.nModified + " items modified");
+    });
+
     client.close();
 });
