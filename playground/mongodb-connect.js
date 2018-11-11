@@ -7,6 +7,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     console.log("Connecting with the mongo server");
     const db = client.db('TodoApp');
 
+    //INSERTING
     //  // Insert one
     // db.collection('TodoApp').insertOne({
     //     text: 'test text1',
@@ -34,7 +35,8 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     //     console.log(result.ops);
     // });
 
-    //Fetch all item:
+    //FETCHING:
+    //Fetch all items:
     // db.collection('todos').find({}).toArray((error,result)=>{
     //     if (error) throw  error;
     //     console.log(result);
@@ -49,7 +51,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     //     console.log(result);
     // });
 
-    //Fetching one item with certain criteriA
+    //Fetching one item with matching certain criteria
     // var query = {text:'complete node js crud'};
     // db.collection('todos').find(query).toArray((error,result)=>{
     //    if(error){
@@ -59,14 +61,30 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     // });
 
     //Fetching one item with certain id
-    var query = {text:'complete node js crud'};
-    db.collection('todos').findOne({_id :new ObjectID("5be7a524149d7c0953176c0a")},(error,result)=>{
-       if(error){
-           throw  error;
-       }
-       console.log(result);
-    });
+    // db.collection('todos').findOne({_id :new ObjectID("5be7a524149d7c0953176c0a")},(error,result)=>{
+    //    if(error){
+    //        throw  error;
+    //    }
+    //    console.log(result);
+    // });
 
+    //UPDATING
+    // updating a first object
+    // let myObject = { text:'Read a book1'};
+    // let newObject = {$set:{text:'Read a book2'}};
+    // db.collection('todos').updateOne(myObject,newObject,(error,result)=>{
+    //     if(error)
+    //         throw error;
+    //     console.log(result);
+    // });
 
+    //updating many objects in collections
+    // let myObject = {completed:true};
+    // let newObject = {$set:{completed:false}};
+    // db.collection('todos').updateMany(myObject,newObject,(error,result)=>{
+    //     if(error)
+    //         throw error;
+    //     console.log(result);
+    // });
     client.close();
 });
