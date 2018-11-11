@@ -96,8 +96,14 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     /**********
      *DELETE*
      **********/
-    db.collection('todos').deleteMany({completed:true}).then((result)=>{
+    //Deleting one item which is completed
+    db.collection('todos').deleteOne({completed:true}).then((result)=>{
        console.log(result);
+    });
+
+    //Deleting many items which are completed
+    db.collection('todos').deleteMany({completed:true}).then((result)=>{
+        console.log(result);
     });
 
     client.close();
