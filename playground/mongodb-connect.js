@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const {ObjectID} = require('mongodb'); //Object destructing
 MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     if (err) {
         return console.log("Unable to connect  to the mongo server", err);
@@ -43,9 +44,27 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     //But results comes with id as well
     //To shut the _id we need to set the _id to 0 value
     //We cannot use both the 0 and 1 value at the same time except for the id value
-    db.collection('todos').find({},{projection:{_id:0,text:1}}).toArray((error,result)=>{
-        if(error) throw error;
-        console.log(result);
+    // db.collection('todos').find({},{projection:{_id:0,text:1}}).toArray((error,result)=>{
+    //     if(error) throw error;
+    //     console.log(result);
+    // });
+
+    //Fetching one item with certain criteriA
+    // var query = {text:'complete node js crud'};
+    // db.collection('todos').find(query).toArray((error,result)=>{
+    //    if(error){
+    //        throw  error;
+    //    }
+    //    console.log(result);
+    // });
+
+    //Fetching one item with certain id
+    var query = {text:'complete node js crud'};
+    db.collection('todos').findOne({_id :new ObjectID("5be7a524149d7c0953176c0a")},(error,result)=>{
+       if(error){
+           throw  error;
+       }
+       console.log(result);
     });
 
 
