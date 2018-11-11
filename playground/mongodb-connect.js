@@ -34,11 +34,19 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     // });
 
     //Fetch all item:
-    db.collection('todos').find({}).toArray((error,result)=>{
-        if (error) throw  error;
+    // db.collection('todos').find({}).toArray((error,result)=>{
+    //     if (error) throw  error;
+    //     console.log(result);
+    // });
+
+    //Fetch all item with some attributes text only
+    //But results comes with id as well
+    //To shut the _id we need to set the _id to 0 value
+    //We cannot use both the 0 and 1 value at the same time except for the id value
+    db.collection('todos').find({},{projection:{_id:0,text:1}}).toArray((error,result)=>{
+        if(error) throw error;
         console.log(result);
     });
-
 
 
     client.close();
