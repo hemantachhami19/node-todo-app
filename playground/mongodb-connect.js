@@ -85,12 +85,19 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     // });
 
     //updating many objects in collections
-    let myObject = {completed:true};
-    let newObject = {$set:{completed:false}};
-    db.collection('todos').updateMany(myObject,newObject,(error,result)=>{
-        if(error)
-            throw error;
-        console.log(result.result.nModified + " items modified");
+    // let myObject = {completed:true};
+    // let newObject = {$set:{completed:false}};
+    // db.collection('todos').updateMany(myObject,newObject,(error,result)=>{
+    //     if(error)
+    //         throw error;
+    //     console.log(result.result.nModified + " items modified");
+    // });
+
+    /**********
+     *DELETE*
+     **********/
+    db.collection('todos').deleteMany({completed:true}).then((result)=>{
+       console.log(result);
     });
 
     client.close();
